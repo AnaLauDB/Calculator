@@ -11,13 +11,10 @@ function calculate() {
     try {
         let expression = display.value;
 
-        // Agregar * entre número y paréntesis de apertura: 4( → 4*(
         expression = expression.replace(/(\d)\(/g, '$1*(');
 
-        // Agregar * entre paréntesis de cierre y número: )4 → )*4
         expression = expression.replace(/\)(\d)/g, ')*$1');
 
-        // Agregar * entre paréntesis de cierre y paréntesis de apertura: )( → )*(
         expression = expression.replace(/\)\(/g, ')*(');
 
         display.value = eval(expression);
@@ -28,33 +25,39 @@ function calculate() {
 
 export default function Calculator() {
     return (
-        <div>
-            <h1>Calculator</h1>
-            <button onClick={() => { appendToDisplay('+') }}>+</button>
-            <button onClick={() => { appendToDisplay('-') }}>-</button>
-            <button onClick={() => { appendToDisplay('*') }}>*</button>
-            <button onClick={() => { appendToDisplay('/') }}>/</button>
-            <button onClick={() => { appendToDisplay('(') }}>(</button>
-            <button onClick={() => { appendToDisplay(')') }}>)</button>
-            <button onClick={() => { appendToDisplay('7') }}>7</button>
-            <button onClick={() => { appendToDisplay('8') }}>8</button>
-            <button onClick={() => { appendToDisplay('9') }}>9</button>
-            <br />
-            <button onClick={() => { appendToDisplay('4') }}>4</button>
-            <button onClick={() => { appendToDisplay('5') }}>5</button>
-            <button onClick={() => { appendToDisplay('6') }}>6</button>
-            <br />
-            <button onClick={() => { appendToDisplay('1') }}>1</button>
-            <button onClick={() => { appendToDisplay('2') }}>2</button>
-            <button onClick={() => { appendToDisplay('3') }}>3</button>
-            <br />
-            <button onClick={() => { appendToDisplay('0') }}>0</button>
-            <br />
-            <input type="text" id="display" readOnly />
-            <br />
-            <button onClick={calculate}>=</button>
-            <button onClick={clearDisplay}>C</button>
+        <div className="calculator-container">
+            <h1 className="calculator-title">Calculator</h1>
+            <input
+                type="text"
+                id="display"
+                className="calculator-display"
+                readOnly
+            />
+            <div className="calculator-buttons">
+                <button className="calculator-button operator" onClick={clearDisplay}>C</button>
+                <button className="calculator-button operator" onClick={() => { appendToDisplay('(') }}>(</button>
+                <button className="calculator-button operator" onClick={() => { appendToDisplay(')') }}>)</button>
+                <button className="calculator-button operator" onClick={() => { appendToDisplay('/') }}>/</button>
 
+                <button className="calculator-button" onClick={() => { appendToDisplay('7') }}>7</button>
+                <button className="calculator-button" onClick={() => { appendToDisplay('8') }}>8</button>
+                <button className="calculator-button" onClick={() => { appendToDisplay('9') }}>9</button>
+                <button className="calculator-button operator" onClick={() => { appendToDisplay('*') }}>*</button>
+
+                <button className="calculator-button" onClick={() => { appendToDisplay('4') }}>4</button>
+                <button className="calculator-button" onClick={() => { appendToDisplay('5') }}>5</button>
+                <button className="calculator-button" onClick={() => { appendToDisplay('6') }}>6</button>
+                <button className="calculator-button operator" onClick={() => { appendToDisplay('-') }}>-</button>
+
+                <button className="calculator-button" onClick={() => { appendToDisplay('1') }}>1</button>
+                <button className="calculator-button" onClick={() => { appendToDisplay('2') }}>2</button>
+                <button className="calculator-button" onClick={() => { appendToDisplay('3') }}>3</button>
+                <button className="calculator-button operator" onClick={() => { appendToDisplay('+') }}>+</button>
+
+                <button className="calculator-button zero" onClick={() => { appendToDisplay('0') }}>0</button>
+                <button className="calculator-button" onClick={() => { appendToDisplay('.') }}>.</button>
+                <button className="calculator-button equals" onClick={calculate}>=</button>
+            </div>
         </div>
     );
 }
