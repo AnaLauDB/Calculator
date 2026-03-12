@@ -1,9 +1,25 @@
+
 function appendToDisplay(value) {
     document.getElementById('display').value += value;
 }
 
 function clearDisplay() {
     document.getElementById('display').value = '';
+}
+
+function deleteLastChar() {
+    const display = document.getElementById('display');
+    display.value = display.value.slice(0, -1);
+}
+
+function calculatePercentage() {
+    const display = document.getElementById('display');
+    try {
+        const result = eval(display.value) / 100;
+        display.value = result;
+    } catch (e) {
+        display.value = 'Error';
+    }
 }
 
 function calculate() {
@@ -35,28 +51,32 @@ export default function Calculator() {
             />
             <div className="calculator-buttons">
                 <button className="calculator-button operator" onClick={clearDisplay}>C</button>
+                <button className="calculator-button operator" onClick={deleteLastChar}>DE</button>
                 <button className="calculator-button operator" onClick={() => { appendToDisplay('(') }}>(</button>
                 <button className="calculator-button operator" onClick={() => { appendToDisplay(')') }}>)</button>
-                <button className="calculator-button operator" onClick={() => { appendToDisplay('/') }}>/</button>
 
                 <button className="calculator-button" onClick={() => { appendToDisplay('7') }}>7</button>
                 <button className="calculator-button" onClick={() => { appendToDisplay('8') }}>8</button>
                 <button className="calculator-button" onClick={() => { appendToDisplay('9') }}>9</button>
-                <button className="calculator-button operator" onClick={() => { appendToDisplay('*') }}>*</button>
+                <button className="calculator-button operator" onClick={() => { appendToDisplay('/') }}>/</button>
 
                 <button className="calculator-button" onClick={() => { appendToDisplay('4') }}>4</button>
                 <button className="calculator-button" onClick={() => { appendToDisplay('5') }}>5</button>
                 <button className="calculator-button" onClick={() => { appendToDisplay('6') }}>6</button>
-                <button className="calculator-button operator" onClick={() => { appendToDisplay('-') }}>-</button>
+                <button className="calculator-button operator" onClick={() => { appendToDisplay('*') }}>*</button>
 
                 <button className="calculator-button" onClick={() => { appendToDisplay('1') }}>1</button>
                 <button className="calculator-button" onClick={() => { appendToDisplay('2') }}>2</button>
                 <button className="calculator-button" onClick={() => { appendToDisplay('3') }}>3</button>
-                <button className="calculator-button operator" onClick={() => { appendToDisplay('+') }}>+</button>
+                <button className="calculator-button operator" onClick={() => { appendToDisplay('-') }}>-</button>
 
                 <button className="calculator-button zero" onClick={() => { appendToDisplay('0') }}>0</button>
                 <button className="calculator-button" onClick={() => { appendToDisplay('.') }}>.</button>
+                <button className="calculator-button operator" onClick={calculatePercentage}>%</button>
                 <button className="calculator-button equals" onClick={calculate}>=</button>
+                <button className="calculator-button operator" onClick={() => { appendToDisplay('+') }}>+</button>
+
+
             </div>
         </div>
     );
